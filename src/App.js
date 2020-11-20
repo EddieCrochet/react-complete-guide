@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   //"Handler" naming convntion denotes that it is a function that is not called, but handles an event
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     //console.log("Was clicked!");
     //DO NOT DO THIS ... this.state.persons[0].name = "EDWARDS!!";
     this.setState({
@@ -24,7 +24,7 @@ class App extends Component {
       // merges the old with the new
       // react recognizes that the state changes - so it re renders the DOM
       persons: [
-        {name: 'Edward', age: 28},
+        {name: newName, age: 28},
         {name: 'Manu', age: 29},
         {name: 'Stephanie', age: 21}
       ]
@@ -36,10 +36,17 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a react app</h1>
         <p>this works and stuff</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+        <button onClick={() => this.switchNameHandler("Edwilliam!")}>Switch Name</button>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}/>
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'EDDDD')}>My Hobbies: Racing</Person>
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}/>
       </div>
     ); 
    // return React.createElement('div', null, 'h1', 'Hi, I\'m a react app!')
@@ -138,6 +145,4 @@ switchNameHandler = () => {
     ]
   }) 
 }
-*/
-
 */
