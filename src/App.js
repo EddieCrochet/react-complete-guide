@@ -17,19 +17,25 @@ class App extends Component {
   }
 
   //"Handler" naming convntion denotes that it is a function that is not called, but handles an event
-  switchNameHandler = (newName) => {
-    //console.log("Was clicked!");
-    //DO NOT DO THIS ... this.state.persons[0].name = "EDWARDS!!";
-    this.setState({
-      //this react component method compares the 2 states and mutates accordingly
-      // merges the old with the new
-      // react recognizes that the state changes - so it re renders the DOM
-      persons: [
-        {name: newName, age: 28},
-        {name: 'Manu', age: 29},
-        {name: 'Stephanie', age: 21}
-      ]
-    })
+  // switchNameHandler = (newName) => {
+  //   //console.log("Was clicked!");
+  //   //DO NOT DO THIS ... this.state.persons[0].name = "EDWARDS!!";
+  //   this.setState({
+  //     //this react component method compares the 2 states and mutates accordingly
+  //     // merges the old with the new
+  //     // react recognizes that the state changes - so it re renders the DOM
+  //     persons: [
+  //       {name: newName, age: 28},
+  //       {name: 'Manu', age: 29},
+  //       {name: 'Stephanie', age: 21}
+  //     ]
+  //   })
+  // }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   nameChangeHandler = (event) => {
@@ -44,10 +50,8 @@ class App extends Component {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    console.log(doesShow);
     //set the property opposite of what it is and merge with the rest of the state
     this.setState({showPersons: !doesShow})
-    console.log(doesShow);
   }
 
   render() {
@@ -60,18 +64,20 @@ class App extends Component {
        cursor: 'pointer'
     };
 
-    return (
-      <div className="App">
-        <h1>Hi, I'm a react app</h1>
-        <p>this works and stuff</p>
-        <button 
-        style={style}
-        onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        { 
-          this.state.showPersons === true ? 
-          //we can interject javascript for this ternary with single enclosing curly braces
-            <div>
-            <Person 
+    let persons = null;
+    //preferred way of outputtig conditional content
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            //maps to an array of jsx objects
+            return <Person 
+            click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age} />
+          })}
+            {/* <Person 
               name={this.state.persons[0].name} 
               age={this.state.persons[0].age}/>
             <Person 
@@ -81,10 +87,20 @@ class App extends Component {
               changed={this.nameChangeHandler}>My Hobbies: Racing</Person>
             <Person 
               name={this.state.persons[2].name} 
-              age={this.state.persons[2].age}/>
-          </div> : // colon denotes the ELSE in my TERNARY statement
-                  null
-        }
+              age={this.state.persons[2].age}/> */}
+          </div> 
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, I'm a react app</h1>
+        <p>this works and stuff</p>
+        <button 
+        style={style}
+        onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        { //output the entire module (after if conditional rings true)
+        persons}
       </div>
     ); 
    // return React.createElement('div', null, 'h1', 'Hi, I\'m a react app!')
