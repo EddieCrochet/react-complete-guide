@@ -12,7 +12,8 @@ class App extends Component {
       {name: 'Manu', age: 29},
       {name: 'Stephanie', age: 26}
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
   //"Handler" naming convntion denotes that it is a function that is not called, but handles an event
@@ -41,6 +42,14 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    console.log(doesShow);
+    //set the property opposite of what it is and merge with the rest of the state
+    this.setState({showPersons: !doesShow})
+    console.log(doesShow);
+  }
+
   render() {
     //THE BELOW IS STILL JS
     const style = {
@@ -57,18 +66,25 @@ class App extends Component {
         <p>this works and stuff</p>
         <button 
         style={style}
-        onClick={() => this.switchNameHandler("Edwilliam!")}>Switch Name</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}/>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'EDDDD')}
-          changed={this.nameChangeHandler}>My Hobbies: Racing</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+        onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        { 
+          this.state.showPersons === true ? 
+          //we can interject javascript for this ternary with single enclosing curly braces
+            <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age}/>
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'EDDDD')}
+              changed={this.nameChangeHandler}>My Hobbies: Racing</Person>
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age}/>
+          </div> : // colon denotes the ELSE in my TERNARY statement
+                  null
+        }
       </div>
     ); 
    // return React.createElement('div', null, 'h1', 'Hi, I\'m a react app!')
