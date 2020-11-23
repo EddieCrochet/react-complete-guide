@@ -8,9 +8,9 @@ class App extends Component {
     //WHEN STATE CHANGES IT RE RENDERS THE DOM
     //state allows you to manage anything about the object you desire
     persons: [
-      {name: 'Max', age: 28},
-      {name: 'Manu', age: 29},
-      {name: 'Stephanie', age: 26}
+      { id: '74838', name: 'Max', age: 28},
+      { id: '64378', name: 'Manu', age: 29},
+      { id: '54637', name: 'Stephanie', age: 26}
     ],
     otherState: 'some other value',
     showPersons: false
@@ -33,19 +33,33 @@ class App extends Component {
   // }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    //const persons = this.state.persons.slice();
+    //three dot spread below spreads out list of elements that get added to new array
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
   }
 
-  nameChangeHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: 'Max', age: 28},
-        {name: event.target.value, age: 29},
-        {name: 'Stephanie', age: 26}
-      ]
-    })
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      //store in the const first element's index in array that's id matches the id passed into the handler
+      return p.id === id;
+    });
+
+    const person = {
+      //here spread puts all properties of objects into this new object
+      ...this.state.persons[personIndex]
+    };
+
+    //alternative withOUT spread operator
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons })
   }
 
   togglePersonsHandler = () => {
@@ -75,7 +89,10 @@ class App extends Component {
             return <Person 
             click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age} />
+              age={person.age} 
+              key={person.id}
+              //function syntax below is used to pass data
+              changed={(event) => this.nameChangeHandler(event, person.id)}/>
           })}
             {/* <Person 
               name={this.state.persons[0].name} 
