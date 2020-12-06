@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
+import styled from 'styled-components';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+background-color: ${props => props.alt ? 'red' : 'green'};
+color: white;
+font: inherit;
+border: 1px solid blue;
+padding: 8px;
+cursor: pointer;
+
+&:hover {
+  background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+  color: ${props => props.alt ? 'purple' : 'black'};
+};
+`;
+
+
 
 class App extends Component {
   //managing compents internal data
@@ -71,12 +88,19 @@ class App extends Component {
   render() {
     //THE BELOW IS STILL JS
     const style = {
-      backgroundColor: 'white',
+       backgroundColor: 'green',
+       color: 'white',
        font: 'inherit',
        border: '1px solid blue',
        padding: '8px',
-       cursor: 'pointer'
+       cursor: 'pointer',
+       ':hover': {
+         backgroundColor: 'lightgreen',
+         color: 'black'
+       }
     };
+    //inline styling in this fashion seems to be best when 1. the styling is very simple
+    // and 2. when you want unique css for elements on this specific page only
 
     let persons = null;
     //preferred way of outputtig conditional content
@@ -107,18 +131,32 @@ class App extends Component {
               age={this.state.persons[2].age}/> */}
           </div> 
       );
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'purple'
+      // }
+    }
+
+    const classes = [];
+
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if(this.state.persons.length <= 1) {
+       classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Hi, I'm a react app</h1>
-        <p>this works and stuff</p>
-        <button 
-        style={style}
-        onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        { //output the entire module (after if conditional rings true)
-        persons}
-      </div>
+        <div className="App">
+          <h1>Hi, I'm a react app</h1>
+          <p className={classes.join(' ')}>this works and stuff</p>
+          <StyledButton
+          alt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+          { //output the entire module (after if conditional rings true)
+          persons}
+        </div>
     ); 
    // return React.createElement('div', null, 'h1', 'Hi, I\'m a react app!')
   }
