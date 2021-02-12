@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-//import './Person.css';
+//import styled from 'styled-components';
+import classes from './Person.css';
 
+//before css modules
+/*
 const StyledDiv = styled.div`
     width: 60%;
     margin: 16px auto;
@@ -15,6 +17,7 @@ const StyledDiv = styled.div`
         width: 450px;
 }
 `;
+*/
 
 const person = (props) => {
     // const style = {
@@ -24,11 +27,11 @@ const person = (props) => {
     // };
     return (
         //<div className="Person" style={style}>
-        <StyledDiv>
+        <div className={classes.Person}>
             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.name} />
-        </StyledDiv>
+        </div>
     )
 };
 
