@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 //import styled from 'styled-components';
 import Person from './Person/Person';
 
 ////////////
-//WITHOUT CSS MODULES
+//WITHOUT CSS MODULES - styled components
 /*
 const StyledButton = styled.button`
 background-color: ${props => props.alt ? 'red' : 'green'};
@@ -90,6 +90,7 @@ class App extends Component {
 
   render() {
     //THE BELOW IS STILL JS
+    /*
     const style = {
        backgroundColor: 'green',
        color: 'white',
@@ -102,11 +103,13 @@ class App extends Component {
          color: 'black'
        }
     };
+    */
     //inline styling in this fashion seems to be best when 1. the styling is very simple
     // and 2. when you want unique css for elements on this specific page only
 
     let persons = null;
     //preferred way of outputtig conditional content
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -134,6 +137,12 @@ class App extends Component {
               age={this.state.persons[2].age}/> */}
           </div> 
       );
+
+      btnClass = classes.Red;
+
+      //btnClass.push(classes.Red);
+
+
       // style.backgroundColor = 'red';
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
@@ -141,21 +150,21 @@ class App extends Component {
       // }
     }
 
-    const classes = [];
+    const assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1) {
-       classes.push('bold');
+       assignedClasses.push(classes.bold);
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I'm a react app</h1>
-          <p className={classes.join(' ')}>this works and stuff</p>
+          <p className={assignedClasses.join(' ')}>this works and stuff</p>
           <button
-          className='button'
+          className= {brnClass.join(' ')}
           onClick={this.togglePersonsHandler}>Toggle Persons
           </button>
           { //output the entire module (after if conditional rings true)
