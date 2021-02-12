@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import Person from './Person/Person';
 
+////////////
+//WITHOUT CSS MODULES
+/*
 const StyledButton = styled.button`
 background-color: ${props => props.alt ? 'red' : 'green'};
 color: white;
@@ -16,7 +19,7 @@ cursor: pointer;
   color: ${props => props.alt ? 'purple' : 'black'};
 };
 `;
-
+*/
 
 
 class App extends Component {
@@ -151,9 +154,10 @@ class App extends Component {
         <div className="App">
           <h1>Hi, I'm a react app</h1>
           <p className={classes.join(' ')}>this works and stuff</p>
-          <StyledButton
-          alt={this.state.showPersons}
-          onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+          <button
+          className='button'
+          onClick={this.togglePersonsHandler}>Toggle Persons
+          </button>
           { //output the entire module (after if conditional rings true)
           persons}
         </div>
