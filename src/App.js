@@ -164,7 +164,7 @@ class App extends Component {
           <h1>Hi, I'm a react app</h1>
           <p className={assignedClasses.join(' ')}>this works and stuff</p>
           <button
-          className= {brnClass.join(' ')}
+          className= {btnClass}
           onClick={this.togglePersonsHandler}>Toggle Persons
           </button>
           { //output the entire module (after if conditional rings true)
