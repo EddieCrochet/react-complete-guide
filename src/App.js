@@ -83,9 +83,11 @@ class App extends Component {
   }
 
   togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
+    console.log(this.state.showPersons);
+    let doesShow = this.state.showPersons;
     //set the property opposite of what it is and merge with the rest of the state
     this.setState({showPersons: !doesShow})
+    setTimeout(() => { console.log(this.state.showPersons) }, 2000);
   }
 
   render() {
@@ -159,6 +161,7 @@ class App extends Component {
        assignedClasses.push(classes.bold);
     }
 
+  
     return (
         <div className={classes.App}>
           <h1>Hi, I'm a react app</h1>
