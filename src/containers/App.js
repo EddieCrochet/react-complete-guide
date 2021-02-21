@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 //import styled from 'styled-components';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 ////////////
 //WITHOUT CSS MODULES - styled components
@@ -111,13 +112,16 @@ class App extends Component {
 
     let persons = null;
     //preferred way of outputtig conditional content
-    let btnClass = '';
+    //let btnClass = '';
 
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
+      persons = 
+          <Persons 
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}/>
+          {/* {this.state.persons.map((person, index) => {
             //maps to an array of jsx objects
             return <Person 
             click={() => this.deletePersonHandler(index)}
@@ -127,7 +131,7 @@ class App extends Component {
               //function syntax below is used to pass data
               changed={(event) => this.nameChangeHandler(event, person.id)}/>
               
-          })}
+          })} */}
             {/* <Person 
               name={this.state.persons[0].name} 
               age={this.state.persons[0].age}/>
@@ -139,10 +143,9 @@ class App extends Component {
             <Person 
               name={this.state.persons[2].name} 
               age={this.state.persons[2].age}/> */}
-          </div> 
-      );
+        ;
 
-      btnClass = classes.Red;
+      //btnClass = classes.Red;
 
       //btnClass.push(classes.Red);
 
@@ -153,25 +156,13 @@ class App extends Component {
       //   color: 'purple'
       // }
     }
-
-    const assignedClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if(this.state.persons.length <= 1) {
-       assignedClasses.push(classes.bold);
-    }
-
   
     return (
         <div className={classes.App}>
-          <h1>Hi, I'm a react app</h1>
-          <p className={assignedClasses.join(' ')}>this works and stuff</p>
-          <button
-          className= {btnClass}
-          onClick={this.togglePersonsHandler}>Toggle Persons
-          </button>
+          <Cockpit 
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler}/>
           { //output the entire module (after if conditional rings true)
           persons}
         </div>
