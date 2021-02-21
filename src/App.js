@@ -154,6 +154,7 @@ class App extends Component {
     }
 
     const assignedClasses = [];
+    console.log(classes);
 
     if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red);
