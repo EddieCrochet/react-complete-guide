@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classes from './App.css';
 //import styled from 'styled-components';
 import Person from '../components/Persons/Person/Person';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 ////////////
 //WITHOUT CSS MODULES - styled components
@@ -120,15 +119,14 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             //maps to an array of jsx objects
-            return <ErrorBoundary>
-              <Person 
+            return <Person 
             click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age} 
               key={person.id}
               //function syntax below is used to pass data
               changed={(event) => this.nameChangeHandler(event, person.id)}/>
-              </ErrorBoundary>
+              
           })}
             {/* <Person 
               name={this.state.persons[0].name} 
