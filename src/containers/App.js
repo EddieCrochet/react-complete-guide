@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 //import styled from 'styled-components';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Person from '../components/Persons/Person/Person';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 ////////////
 //WITHOUT CSS MODULES - styled components
