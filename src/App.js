@@ -113,6 +113,7 @@ class App extends Component {
     //preferred way of outputtig conditional content
     let btnClass = '';
 
+
     if (this.state.showPersons) {
       persons = (
         <div>
