@@ -121,7 +121,7 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangeHandler}/>
-          {/* {this.state.persons.map((person, index) => {
+          /*{ {this.state.persons.map((person, index) => {
             //maps to an array of jsx objects
             return <Person 
             click={() => this.deletePersonHandler(index)}
@@ -131,8 +131,8 @@ class App extends Component {
               //function syntax below is used to pass data
               changed={(event) => this.nameChangeHandler(event, person.id)}/>
               
-          })} */}
-            {/* <Person 
+          })} }
+            { <Person 
               name={this.state.persons[0].name} 
               age={this.state.persons[0].age}/>
             <Person 
@@ -142,7 +142,7 @@ class App extends Component {
               changed={this.nameChangeHandler}>My Hobbies: Racing</Person>
             <Person 
               name={this.state.persons[2].name} 
-              age={this.state.persons[2].age}/> */}
+              age={this.state.persons[2].age}/> }*/
         ;
 
       //btnClass = classes.Red;
